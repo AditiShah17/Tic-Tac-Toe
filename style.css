@@ -1,0 +1,198 @@
+/* ---------------- */
+/* Custom Properties (Color Palette) */
+/* ---------------- */
+:root {
+    --color-dark-bg: #1A2A33;
+    --color-dark-ui: #1F3641;
+    --color-silver: #A8BFC9;
+    --color-silver-hover: #DBE8ED;
+    --color-light-blue: #31C3BD;
+    --color-light-blue-hover: #65E9E4;
+    --color-light-yellow: #F2B137;
+    --color-light-yellow-hover: #FFC860;
+    
+    --font-family: "Outfit", sans-serif; /* You may need to import this font */
+    --border-radius: 10px;
+    --shadow-sm: 0 4px 0;
+    --shadow-md: 0 8px 0;
+}
+
+/* ---------------- */
+/* Basic Setup & Reset */
+/* ---------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-dark-bg);
+    color: var(--color-silver);
+    /* Center the game container */
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ---------------- */
+/* Game Container */
+/* ---------------- */
+.game-container {
+    width: 100%;
+    max-width: 375px; /* Max width for a mobile-first layout */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between header, board, and scoreboard */
+}
+
+/* ---------------- */
+/* 1. Header Section */
+/* ---------------- */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    /* We can style this better with SVGs later */
+    color: var(--color-light-blue);
+}
+
+.turn-indicator {
+    background-color: var(--color-dark-ui);
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm) rgba(0,0,0,0.2);
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-silver);
+}
+
+.turn-indicator .turn-icon {
+    font-size: 1.2rem;
+}
+
+.reset-button {
+    background-color: var(--color-silver);
+    color: var(--color-dark-bg);
+    font-size: 1.5rem; /* Make the icon bigger */
+    font-weight: 700;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    box-shadow: var(--shadow-sm) #6B8997;
+    transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+    background-color: var(--color-silver-hover);
+}
+
+/* ---------------- */
+/* 2. Game Board Section */
+/* ---------------- */
+.game-board {
+    display: grid;
+    /* Create 3 columns of equal size (1 fraction) */
+    grid-template-columns: 1fr 1fr 1fr;
+    /* Create 3 rows of equal size */
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px; /* Space between the cells */
+    width: 100%;
+}
+
+.cell {
+    background-color: var(--color-dark-ui);
+    height: 105px; /* Fixed height for cells */
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md) rgba(0,0,0,0.25);
+    cursor: pointer;
+    
+    /* Center the X or O inside */
+    display: grid;
+    place-items: center;
+    
+    /* Style for the X and O text/icons */
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+/* We'll add classes with JavaScript to show X and O */
+.cell.x {
+    color: var(--color-light-blue);
+}
+
+.cell.o {
+    color: var(--color-light-yellow);
+}
+
+/* Add a hover effect to show the current player's mark */
+.game-board:not(.game-over) .cell:not(.x):not(.o):hover {
+    /* This needs JavaScript to know whose turn it is, */
+    /* but we can add a placeholder background */
+    background-image: url("path/to/icon-outline-x.svg"); /* Placeholder */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+
+/* ---------------- */
+/* 3. Scoreboard Section */
+/* ---------------- */
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 15px; 
+}
+.score-box {
+    flex: 1; /* Make all boxes share the space equally */
+    padding: 12px;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.score-box .score-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.score-box .score-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Specific colors for each score box */
+.x-score {
+    background-color: var(--color-light-blue);
+    color: var(--color-dark-bg);
+}
+
+.ties-score {
+    background-color: var(--color-silver);
+    color: var(--color-dark-bg);
+}
+
+.o-score {
+    background-color: var(--color-light-yellow);
+    color: var(--color-dark-bg);
+}
